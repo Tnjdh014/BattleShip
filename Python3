@@ -1,0 +1,43 @@
+ships_grid = [
+  ['B', 'B', 'B', 'E'],
+  ['E', 'E', 'E', 'E'],
+  ['E', 'B', 'E', 'B'],
+  ['E', 'B', 'E', 'B']
+]
+
+
+guesses_grid = [ ['E', 'E', 'E', 'E'],
+  ['E', 'E', 'E', 'E'],
+  ['E', 'E', 'E', 'E'],
+  ['E', 'E', 'E', 'E'] ]
+
+
+def print_grid(grid):
+  for row in grid:
+    print(row)
+num_hits = 0
+num_misses = 0
+while num_hits < 7 and num_misses < 9:
+  user_row = int(input('Enter the row for your guess (0-3): '))
+  user_col = int(input('Enter the column for your guess (0-3): '))
+
+  if user_col > 3 and user_row > 3:
+      print('Please choose a valid row and column')
+  elif user_col < 0 and user_row < 0:
+      print('Please choose a valid row and column')
+    
+  if guesses_grid[user_row][user_col] != 'E':
+    print('Enter a row and column you have not already guessed')
+  
+  if ships_grid[user_row][user_col] == 'B':
+    guesses_grid[user_row][user_col] = 'H'
+    num_hits += 1
+  elif ships_grid[user_row][user_col] == 'E':
+    guesses_grid[user_row][user_col] = 'M'
+    num_misses += 1
+
+  if num_hits == 7:
+    print('Congratulations, you sunk all my Battleships!')
+  elif num_misses == 9:
+    print('Sorry, you lose...')
+  print_grid(guesses_grid)
